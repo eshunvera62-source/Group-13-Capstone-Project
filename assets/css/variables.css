@@ -1,0 +1,33 @@
+:root {
+  /* Brand colours */
+  --aws-orange:  #FF9900;
+  --aws-dark:    #232F3E;
+  --aws-navy:    #1a2332;
+  --aws-light:   #FAFBFC;
+  --aws-border:  #e8eaed;
+
+  /* Text colours */
+  --text-main:   #0f1923;
+  --text-muted:  #5f6b7a;
+  --text-light:  #8896a4;
+
+  /* Border radii */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+
+  /* Shadows */
+  --shadow-sm:   0 1px 4px rgba(0, 0, 0, .06);
+  --shadow-md:   0 4px 20px rgba(0, 0, 0, .10);
+  --shadow-lg:   0 12px 40px rgba(0, 0, 0, .14);
+
+  /* Category colours */
+  --cat-compute:   #E65C00;
+  --cat-storage:   #0073BB;
+  --cat-database:  #7B42BC;
+  --cat-network:   #1DA462;
+  --cat-security:  #D91515;
+  --cat-monitor:   #007ACC;
+  --cat-devops:    #C7780A;
+  --cat-messaging: #C7156A;
+}

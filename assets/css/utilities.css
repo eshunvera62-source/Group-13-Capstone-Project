@@ -1,0 +1,127 @@
+/* ─── Icon wrap backgrounds per category ─────────────────── */
+.icon-compute   { background: rgba(230, 92,  0,   .1); }
+.icon-storage   { background: rgba(0,   115, 187, .1); }
+.icon-database  { background: rgba(123, 66,  188, .1); }
+.icon-network   { background: rgba(29,  164, 98,  .1); }
+.icon-security  { background: rgba(217, 21,  21,  .1); }
+.icon-monitor   { background: rgba(0,   122, 204, .1); }
+.icon-devops    { background: rgba(199, 120, 10,  .1); }
+.icon-messaging { background: rgba(199, 21,  106, .1); }
+.icon-lambda    { background: rgba(230, 92,  0,   .1); font-style: normal; }
+
+/* ─── Category badge colours ─────────────────────────────── */
+.badge-compute   { --color: var(--cat-compute);   margin-top: 6px; }
+.badge-storage   { --color: var(--cat-storage);   margin-top: 6px; }
+.badge-database  { --color: var(--cat-database);  margin-top: 6px; }
+.badge-network   { --color: var(--cat-network);   margin-top: 6px; }
+.badge-security  { --color: var(--cat-security);  margin-top: 6px; }
+.badge-monitor   { --color: var(--cat-monitor);   margin-top: 6px; }
+.badge-devops    { --color: var(--cat-devops);    margin-top: 6px; }
+.badge-messaging { --color: var(--cat-messaging); margin-top: 6px; }
+
+/* ─── Cat-card colour tokens ─────────────────────────────── */
+/* Sets --color on .cat-card so hover/icon/count styles work correctly */
+.cat-compute   { --color: var(--cat-compute);   }
+.cat-storage   { --color: var(--cat-storage);   }
+.cat-database  { --color: var(--cat-database);  }
+.cat-network   { --color: var(--cat-network);   }
+.cat-security  { --color: var(--cat-security);  }
+.cat-monitor   { --color: var(--cat-monitor);   }
+.cat-devops    { --color: var(--cat-devops);    }
+.cat-messaging { --color: var(--cat-messaging); }
+
+/* ─── Section background variants ───────────────────────── */
+.section-white { padding: 72px 0; background: #fff; }
+.services-cta  { text-align: center; margin-top: 36px; }
+
+/* ─── Homepage "Why this guide" cards ────────────────────── */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.why-card {
+  padding: 28px;
+  border: 1.5px solid var(--aws-border);
+  border-radius: var(--radius-md);
+}
+
+.why-icon {
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+
+.why-card h3 {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.why-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ─── Getting-started "Next steps" cards ─────────────────── */
+.next-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.next-card {
+  padding: 28px;
+  border: 1.5px solid var(--aws-border);
+  border-radius: var(--radius-md);
+  transition: box-shadow .2s;
+}
+
+.next-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.next-icon {
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+
+.next-card h3 {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.next-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ─── Inline code & prose helpers ───────────────────────── */
+.code-inline {
+  background: rgba(35, 47, 62, .08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: .9em;
+}
+
+.tip-title {
+  color: var(--text-main);
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.aws-accent {
+  color: var(--aws-orange);
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .main-nav               { display: none; }
+  .footer-inner           { grid-template-columns: 1fr; gap: 28px; }
+  .cheat-grid             { grid-template-columns: 1fr; }
+  .guide-step             { padding: 80px 20px 24px; }
+  .step-num               { top: 20px; left: 20px; }
+  .hero-stats             { gap: 28px; }
+  .cta-buttons            { flex-direction: column; align-items: center; }
+}

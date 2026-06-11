@@ -3,34 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Website</title>
-    <link rel="stylesheet" href="https://group13capstonebucket.s3.us-east-1.amazonaws.com/style.css">
+    <title>Group 13 Capstone</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
-    <header>
-        <h1>My Simple Website</h1>
-        <p id="message">Welcome to my basic page</p>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="brand">Group 13 Capstone</a>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="pages/submit.html">Submit</a>
+                <a href="pages/track.html">Track</a>
+                <a href="pages/admin.html">Admin</a>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <section class="content">
-            <h2>About This Page</h2>
-            <p>This page includes HTML, CSS, JavaScript and an image.</p>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <span class="eyebrow">Capstone Project</span>
+                    <h1>Design and deploy your cloud solution with a modern interface.</h1>
+                    <p>From request submission to tracking, this static site gives your project a polished, production-ready web presence.</p>
+                    <div class="hero-actions">
+                        <a href="pages/submit.html" class="button button-primary">Submit Request</a>
+                        <a href="pages/track.html" class="button button-secondary">Track Progress</a>
+                    </div>
+                </div>
+                <div class="hero-media">
+                    <img src="assets/images/hero.jpg" alt="Team collaboration" loading="lazy">
+                </div>
+            </div>
+        </section>
 
-            <!-- Image -->
-            <img src="https://group13capstonebucket.s3.us-east-1.amazonaws.com/azubidemo.jpg" alt="Sample Image">
+        <section class="features container">
+            <div class="section-heading">
+                <p class="eyebrow">What we offer</p>
+                <h2>Clean visuals, clear flow, and a static site experience.</h2>
+            </div>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Polished UI</h3>
+                    <p>Beautiful layout and typography make the site feel professional and inviting.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Static contact details</h3>
+                    <p>All submission and tracking information is presented as static content for a server-free site.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Sample status view</h3>
+                    <p>Track progress from a static status page with helpful example entries.</p>
+                </article>
+            </div>
+        </section>
 
-            <!-- Button -->
-            <button onclick="changeText()">Click Me</button>
+        <section class="gallery-section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Website preview</p>
+                    <h2>Design elements and imagery that support your story.</h2>
+                </div>
+                <div class="gallery-grid">
+                    <figure>
+                        <img src="assets/images/planning.jpg" alt="Team planning" loading="lazy">
+                        <figcaption>Planning and collaboration.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="assets/images/design.jpg" alt="Design review" loading="lazy">
+                        <figcaption>Modern interface design.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="assets/images/workflow.jpg" alt="Cloud workflow" loading="lazy">
+                        <figcaption>Cloud deployment and tracking.</figcaption>
+                    </figure>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 My Website</p>
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>Group 13 Capstone Project • End-to-end cloud solutions design</p>
+            <p>&copy; 2026 Group 13</p>
+        </div>
     </footer>
-
-    <script src="https://group13capstonebucket.s3.us-east-1.amazonaws.com/app.js"></script>
-    
 </body>
 </html>

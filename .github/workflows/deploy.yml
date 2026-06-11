@@ -1,0 +1,107 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  AWS_REGION: us-east-1
+  S3_BUCKET: group13capstonebucket
+  CLOUDFRONT_ID: ECUXP1DUSC95X
+  EC2_HOST: 3.90.216.6
+
+jobs:
+  deploy-s3:
+    name: Deploy Static Assets to S3
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync all files to S3
+        run: |
+          aws s3 sync ./assets s3://${{ env.S3_BUCKET }}/assets \
+            --delete \
+            --cache-control "max-age=86400"
+          aws s3 cp ./index.html s3://${{ env.S3_BUCKET }}/index.html
+          aws s3 sync ./pages s3://${{ env.S3_BUCKET }}/pages --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ env.CLOUDFRONT_ID }} \
+            --paths "/*"
+
+  deploy-ec2:
+    name: Deploy Web App to EC2
+    runs-on: ubuntu-latest
+    needs: deploy-s3
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy via SSM Run Command
+        id: ssm
+        run: |
+          COMMAND_ID=$(aws ssm send-command \
+            --instance-ids i-0f90603b017225cc3 \
+            --document-name "AWS-RunShellScript" \
+            --parameters 'commands=[
+              "set -e",
+              "aws s3 sync s3://group13capstonebucket/assets /var/www/html/assets --delete",
+              "aws s3 cp s3://group13capstonebucket/index.html /var/www/html/index.html",
+              "aws s3 sync s3://group13capstonebucket/pages /var/www/html/pages --delete",
+              "chown -R apache:apache /var/www/html/",
+              "chmod -R 755 /var/www/html/",
+              "systemctl reload httpd",
+              "echo Deployment complete: $(date)"
+            ]' \
+            --region ${{ env.AWS_REGION }} \
+            --query 'Command.CommandId' \
+            --output text)
+          echo "command_id=$COMMAND_ID" >> $GITHUB_OUTPUT
+          echo "SSM Command ID: $COMMAND_ID"
+
+      - name: Wait for SSM command to complete
+        run: |
+          aws ssm wait command-executed \
+            --command-id ${{ steps.ssm.outputs.command_id }} \
+            --instance-id i-0f90603b017225cc3 \
+            --region ${{ env.AWS_REGION }}
+
+      - name: Check SSM command result
+        run: |
+          RESULT=$(aws ssm get-command-invocation \
+            --command-id ${{ steps.ssm.outputs.command_id }} \
+            --instance-id i-0f90603b017225cc3 \
+            --region ${{ env.AWS_REGION }} \
+            --query '{Status:Status,Output:StandardOutputContent,Error:StandardErrorContent}' \
+            --output json)
+          echo "$RESULT"
+          STATUS=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['Status'])")
+          if [ "$STATUS" != "Success" ]; then
+            echo "SSM command failed with status: $STATUS"
+            exit 1
+          fi
+
+      - name: Verify health check
+        run: |
+          sleep 3
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://${{ env.EC2_HOST }}/health)
+          if [ "$STATUS" != "200" ]; then
+            echo "Health check failed: HTTP $STATUS"
+            exit 1
+          fi
+          echo "Health check passed: HTTP $STATUS"

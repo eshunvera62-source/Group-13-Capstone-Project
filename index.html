@@ -1,95 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Group 13 Capstone</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS Quick Reference Guide — Group 13</title>
+  <meta name="description" content="A single reference page for common AWS services. Find the right service fast — built for new AWS learners.">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="brand">Group 13 Capstone</a>
-            <nav class="main-nav">
-                <a href="index.html">Home</a>
-                <a href="pages/submit.html">Submit</a>
-                <a href="pages/track.html">Track</a>
-                <a href="pages/admin.html">Admin</a>
-            </nav>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-icon">☁️</span> AWS Quick Reference
+    </a>
+    <nav class="main-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="pages/services.html">Services</a>
+      <a href="pages/cheatsheet.html">Cheatsheet</a>
+      <a href="pages/getting-started.html" class="nav-cta">Get Started</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">☁️ Built for AWS Learners</div>
+        <h1>Find the right <span>AWS service</span><br>in seconds.</h1>
+        <p class="hero-sub">New to AWS? Stop Googling across 10 tabs. Every common service — explained simply, with use cases and free tier info — in one place.</p>
+        <form class="hero-search" onsubmit="doSearch(event)">
+          <input type="text" id="heroSearch" placeholder="Search services… e.g. &quot;object storage&quot; or &quot;EC2&quot;" autocomplete="off">
+          <button type="submit">Search →</button>
+        </form>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>35+</strong><span>AWS Services</span></div>
+          <div class="hero-stat"><strong>8</strong><span>Categories</span></div>
+          <div class="hero-stat"><strong>1</strong><span>Reference Page</span></div>
         </div>
-    </header>
+      </div>
+    </div>
+  </section>
 
-    <main>
-        <section class="hero">
-            <div class="container hero-grid">
-                <div class="hero-copy">
-                    <span class="eyebrow">Capstone Project</span>
-                    <h1>Design and deploy your cloud solution with a modern interface.</h1>
-                    <p>From request submission to tracking, this static site gives your project a polished, production-ready web presence.</p>
-                    <div class="hero-actions">
-                        <a href="pages/submit.html" class="button button-primary">Submit Request</a>
-                        <a href="pages/track.html" class="button button-secondary">Track Progress</a>
-                    </div>
-                </div>
-                <div class="hero-media">
-                    <img src="assets/images/hero.jpg" alt="Team collaboration" loading="lazy">
-                </div>
-            </div>
-        </section>
+  <!-- Categories -->
+  <section class="categories">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Browse by category</p>
+        <h2>Every AWS service, neatly organised.</h2>
+        <p>Click a category to jump to those services on the reference page.</p>
+      </div>
+      <div class="cat-grid">
+        <a href="pages/services.html?cat=compute" class="cat-card cat-compute">
+          <div class="cat-icon">⚡</div>
+          <h3>Compute</h3>
+          <p>Run code and workloads</p>
+          <span class="cat-count">6 services</span>
+        </a>
+        <a href="pages/services.html?cat=storage" class="cat-card cat-storage">
+          <div class="cat-icon">🗄️</div>
+          <h3>Storage</h3>
+          <p>Store files and objects</p>
+          <span class="cat-count">4 services</span>
+        </a>
+        <a href="pages/services.html?cat=database" class="cat-card cat-database">
+          <div class="cat-icon">🛢️</div>
+          <h3>Database</h3>
+          <p>Managed data stores</p>
+          <span class="cat-count">5 services</span>
+        </a>
+        <a href="pages/services.html?cat=networking" class="cat-card cat-network">
+          <div class="cat-icon">🌐</div>
+          <h3>Networking</h3>
+          <p>Connect and distribute</p>
+          <span class="cat-count">6 services</span>
+        </a>
+        <a href="pages/services.html?cat=security" class="cat-card cat-security">
+          <div class="cat-icon">🔒</div>
+          <h3>Security</h3>
+          <p>Protect your resources</p>
+          <span class="cat-count">5 services</span>
+        </a>
+        <a href="pages/services.html?cat=monitoring" class="cat-card cat-monitor">
+          <div class="cat-icon">📊</div>
+          <h3>Monitoring</h3>
+          <p>Observe and audit</p>
+          <span class="cat-count">4 services</span>
+        </a>
+        <a href="pages/services.html?cat=devops" class="cat-card cat-devops">
+          <div class="cat-icon">🚀</div>
+          <h3>DevOps</h3>
+          <p>Build and deploy</p>
+          <span class="cat-count">5 services</span>
+        </a>
+        <a href="pages/services.html?cat=messaging" class="cat-card cat-messaging">
+          <div class="cat-icon">📨</div>
+          <h3>Messaging</h3>
+          <p>Queues and events</p>
+          <span class="cat-count">4 services</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        <section class="features container">
-            <div class="section-heading">
-                <p class="eyebrow">What we offer</p>
-                <h2>Clean visuals, clear flow, and a static site experience.</h2>
-            </div>
-            <div class="feature-grid">
-                <article class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3>Polished UI</h3>
-                    <p>Beautiful layout and typography make the site feel professional and inviting.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="feature-icon">💬</div>
-                    <h3>Static contact details</h3>
-                    <p>All submission and tracking information is presented as static content for a server-free site.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="feature-icon">📄</div>
-                    <h3>Sample status view</h3>
-                    <p>Track progress from a static status page with helpful example entries.</p>
-                </article>
-            </div>
-        </section>
+  <!-- Featured services -->
+  <section class="services-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Most used</p>
+        <h2>The 6 services every AWS learner should know first.</h2>
+        <p>Master these and you can build almost anything on AWS.</p>
+      </div>
+      <div class="services-grid">
 
-        <section class="gallery-section">
-            <div class="container">
-                <div class="section-heading">
-                    <p class="eyebrow">Website preview</p>
-                    <h2>Design elements and imagery that support your story.</h2>
-                </div>
-                <div class="gallery-grid">
-                    <figure>
-                        <img src="assets/images/planning.jpg" alt="Team planning" loading="lazy">
-                        <figcaption>Planning and collaboration.</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="assets/images/design.jpg" alt="Design review" loading="lazy">
-                        <figcaption>Modern interface design.</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="assets/images/workflow.jpg" alt="Cloud workflow" loading="lazy">
-                        <figcaption>Cloud deployment and tracking.</figcaption>
-                    </figure>
-                </div>
+        <div class="service-card">
+          <div class="service-top">
+            <div class="service-icon-wrap icon-compute">⚡</div>
+            <div>
+              <div class="service-name">EC2</div>
+              <div class="service-fullname">Elastic Compute Cloud</div>
+              <span class="cat-badge badge-compute">Compute</span>
             </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <p>Group 13 Capstone Project • End-to-end cloud solutions design</p>
-            <p>&copy; 2026 Group 13</p>
+          </div>
+          <p class="service-desc">Virtual servers in the cloud. Choose your CPU, RAM, OS, and region. The building block of most AWS architectures.</p>
+          <p class="use-cases-label">Common uses</p>
+          <ul class="service-uses">
+            <li>Host web servers and APIs</li>
+            <li>Run batch processing jobs</li>
+            <li>Development and test environments</li>
+          </ul>
+          <div class="service-footer">
+            <span class="free-tier">✓ 750 hrs/mo free (t2.micro)</span>
+          </div>
         </div>
-    </footer>
+
+        <div class="service-card">
+          <div class="service-top">
+            <div class="service-icon-wrap icon-storage">🗄️</div>
+            <div>
+              <div class="service-name">S3</div>
+              <div class="service-fullname">Simple Storage Service</div>
+              <span class="cat-badge badge-storage">Storage</span>
+            </div>
+          </div>
+          <p class="service-desc">Infinitely scalable object storage. Store anything — images, videos, backups, static websites — with 99.999999999% durability.</p>
+          <p class="use-cases-label">Common uses</p>
+          <ul class="service-uses">
+            <li>Static website hosting</li>
+            <li>Backup and disaster recovery</li>
+            <li>Data lake for analytics</li>
+          </ul>
+          <div class="service-footer">
+            <span class="free-tier">✓ 5 GB free storage</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-top">
+            <div class="service-icon-wrap icon-lambda">λ</div>
+            <div>
+              <div class="service-name">Lambda</div>
+              <div class="service-fullname">AWS Lambda</div>
+              <span class="cat-badge badge-compute">Compute</span>
+            </div>
+          </div>
+          <p class="service-desc">Run code without provisioning servers. Pay only for the milliseconds your code runs. Scales automatically from 0 to millions of requests.</p>
+          <p class="use-cases-label">Common uses</p>
+          <ul class="service-uses">
+            <li>REST API backends</li>
+            <li>Event-driven processing (S3, DynamoDB triggers)</li>
+            <li>Scheduled tasks and cron jobs</li>
+          </ul>
+          <div class="service-footer">
+            <span class="free-tier">✓ 1M requests/mo free (always)</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-top">
+            <div class="service-icon-wrap icon-security">🔒</div>
+            <div>
+              <div class="service-name">IAM</div>
+              <div class="service-fullname">Identity and Access Management</div>
+              <span class="cat-badge badge-security">Security</span>
+            </div>
+          </div>
+          <p class="service-desc">Control who can access what in your AWS account. Create users, groups, roles, and fine-grained permission policies.</p>
+          <p class="use-cases-label">Common uses</p>
+          <ul class="service-uses">
+            <li>Create team user accounts</li>
+            <li>Grant EC2 access to S3 via roles</li>
+            <li>Enforce least-privilege access</li>
+          </ul>
+          <div class="service-footer">
+            <span class="free-tier">✓ Always free</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-top">
+            <div class="service-icon-wrap icon-network">🌐</div>
+            <div>
+              <div class="service-name">VPC</div>
+              <div class="service-fullname">Virtual Private Cloud</div>
+              <span class="cat-badge badge-network">Networking</span>
+            </div>
+          </div>
+          <p class="service-desc">Your own isolated network inside AWS. Define IP ranges, subnets, route tables, and security groups to control all traffic flow.</p>
+          <p class="use-cases-label">Common uses</p>
+          <ul class="service-uses">
+            <li>Isolate production workloads</li>
+            <li>Create public and private subnets</li>
+            <li>Connect on-premises to AWS</li>
+          </ul>
+          <div class="service-footer">
+            <span class="free-tier">✓ VPC itself is free</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-top">
+            <div class="service-icon-wrap icon-database">🛢️</div>
+            <div>
+              <div class="service-name">RDS</div>
+              <div class="service-fullname">Relational Database Service</div>
+              <span class="cat-badge badge-database">Database</span>
+            </div>
+          </div>
+          <p class="service-desc">Managed relational databases. AWS handles backups, patches, and failover. Supports MySQL, PostgreSQL, MariaDB, Oracle, and SQL Server.</p>
+          <p class="use-cases-label">Common uses</p>
+          <ul class="service-uses">
+            <li>Web app databases</li>
+            <li>Multi-AZ high-availability setups</li>
+            <li>Read replicas for scaling</li>
+          </ul>
+          <div class="service-footer">
+            <span class="free-tier">✓ 750 hrs/mo free (db.t3.micro)</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="services-cta">
+        <a href="pages/services.html" class="button button-primary">View all 35+ services →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why section -->
+  <section class="section-white">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">Why this guide</p>
+        <h2>Stop jumping between 10 AWS docs pages.</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🎯</div>
+          <h3>Plain English</h3>
+          <p>No jargon. Every service explained as simply as possible — what it does, when to use it.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <h3>Instant search</h3>
+          <p>Type a keyword and filter all services instantly. No page loads, no waiting.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">💸</div>
+          <h3>Free tier info</h3>
+          <p>Every service shows what's included in the AWS Free Tier so you don't get surprise bills.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🗺️</div>
+          <h3>Structured learning</h3>
+          <p>From getting started to advanced cheatsheets — follow a clear learning path.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Ready to start learning AWS?</h2>
+      <p>Follow our step-by-step getting started guide — from account creation to deploying your first app.</p>
+      <div class="cta-buttons">
+        <a href="pages/getting-started.html" class="button button-primary">Get Started Guide</a>
+        <a href="pages/cheatsheet.html" class="button button-secondary">View Cheatsheet</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand">☁️ AWS Quick Reference</div>
+        <p>A single reference guide for common AWS services. Built to help new learners find the right service without drowning in documentation.</p>
+        <p class="footer-sub">Built on AWS: EC2 · S3 · CloudFront · ALB · Route 53</p>
+      </div>
+      <div class="footer-col">
+        <h4>Reference</h4>
+        <ul>
+          <li><a href="pages/services.html">All Services</a></li>
+          <li><a href="pages/services.html?cat=compute">Compute</a></li>
+          <li><a href="pages/services.html?cat=storage">Storage</a></li>
+          <li><a href="pages/services.html?cat=database">Database</a></li>
+          <li><a href="pages/cheatsheet.html">Cheatsheet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="pages/getting-started.html">Getting Started</a></li>
+          <li><a href="pages/services.html?cat=security">Security &amp; IAM</a></li>
+          <li><a href="pages/services.html?cat=networking">Networking</a></li>
+          <li><a href="pages/services.html?cat=devops">DevOps</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Group 13 Capstone Project</span>
+      <span>Deployed on <strong class="aws-accent">AWS</strong> · CloudFront + EC2 + S3</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function doSearch(e) {
+  e.preventDefault();
+  const q = document.getElementById('heroSearch').value.trim();
+  if (q) window.location.href = 'pages/services.html?q=' + encodeURIComponent(q);
+}
+</script>
 </body>
 </html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started with AWS — AWS Quick Reference</title>
+  <meta name="description" content="Step-by-step guide to getting started with AWS — from account setup to deploying your first application.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../index.html" class="brand"><span class="brand-icon">☁️</span> AWS Quick Reference</a>
+    <nav class="main-nav">
+      <a href="../index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="cheatsheet.html">Cheatsheet</a>
+      <a href="getting-started.html" class="nav-cta active">Get Started</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <p class="eyebrow">New to AWS?</p>
+    <h1>Getting Started Guide</h1>
+    <p>From zero to your first deployed application — a clear, no-jargon path for beginners.</p>
+  </div>
+</div>
+
+<section class="guide-section">
+  <div class="container">
+    <div class="guide-steps">
+
+      <div class="guide-step">
+        <div class="step-num">1</div>
+        <h3>Create your AWS account</h3>
+        <p>Head to aws.amazon.com and click "Create an AWS Account." You'll need a valid email address, phone number, and a credit or debit card. AWS won't charge you unless you exceed the Free Tier limits.</p>
+        <ul>
+          <li>Use a dedicated email address (not your personal one) for the root account</li>
+          <li>Choose a strong, unique password for root — you'll rarely log in with it</li>
+          <li>Select the "Free Tier" support plan when prompted (it's free)</li>
+          <li>Verify your phone number and billing address to activate the account</li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-num">2</div>
+        <h3>Secure your root account immediately</h3>
+        <p>The root account has unlimited power over your AWS account. Securing it should be the very first thing you do — before anything else.</p>
+        <ul>
+          <li>Enable Multi-Factor Authentication (MFA) on root — use an authenticator app like Google Authenticator or Authy</li>
+          <li>Never use root for everyday tasks — create an IAM admin user for daily work</li>
+          <li>Do not create access keys for root — if they exist, delete them</li>
+          <li>Set up a billing alert in CloudWatch so you're notified if costs exceed $5</li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-num">3</div>
+        <h3>Create an IAM admin user for daily work</h3>
+        <p>IAM (Identity and Access Management) lets you create users with specific permissions. Create an admin user for yourself instead of always using root.</p>
+        <ul>
+          <li>Go to IAM → Users → Create User</li>
+          <li>Attach the <strong>AdministratorAccess</strong> policy for your personal admin user</li>
+          <li>Enable MFA on this user too</li>
+          <li>Create access keys for this user — use them with the AWS CLI</li>
+          <li>Create separate users with limited permissions for team members (least privilege)</li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-num">4</div>
+        <h3>Install and configure the AWS CLI</h3>
+        <p>The AWS Command Line Interface lets you control all AWS services from your terminal. It's essential for automation and scripting.</p>
+        <ul>
+          <li>Download: <strong>aws.amazon.com/cli</strong> — available for Windows, Mac, and Linux</li>
+          <li>Run <code class="code-inline">aws configure</code> and enter your access key ID, secret key, region, and output format</li>
+          <li>Test with <code class="code-inline">aws sts get-caller-identity</code> — you should see your account ID</li>
+          <li>Use named profiles for multiple accounts: <code class="code-inline">aws configure --profile myproject</code></li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-num">5</div>
+        <h3>Understand regions and availability zones</h3>
+        <p>AWS is spread across 30+ geographic regions, each containing 2–6 isolated data centres called Availability Zones (AZs). Always choose the region closest to your users.</p>
+        <ul>
+          <li><strong>Region</strong> — a geographic location (e.g., us-east-1 = N. Virginia)</li>
+          <li><strong>Availability Zone (AZ)</strong> — isolated data centre within a region (e.g., us-east-1a)</li>
+          <li>Deploy across multiple AZs for high availability — if one fails, others keep running</li>
+          <li>Some services (like IAM and CloudFront) are global — they have no region setting</li>
+          <li>Most new learners should start with <strong>us-east-1</strong> — it has every service and the most documentation</li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-num">6</div>
+        <h3>Launch your first EC2 instance</h3>
+        <p>EC2 is a virtual server. Launching one is the first hands-on experience most AWS learners have — and a great way to understand how AWS works.</p>
+        <ul>
+          <li>Go to EC2 → Launch Instance in the AWS Console</li>
+          <li>Choose <strong>Amazon Linux 2023</strong> AMI (it's free tier eligible)</li>
+          <li>Select <strong>t2.micro</strong> or <strong>t3.micro</strong> (free tier eligible)</li>
+          <li>Create a key pair (.pem file) — save it safely, you need it to SSH in</li>
+          <li>Allow SSH (port 22) and HTTP (port 80) in the security group</li>
+          <li>Connect via SSH: <code class="code-inline">ssh -i key.pem ec2-user@YOUR_PUBLIC_IP</code></li>
+          <li>Or use AWS Systems Manager (SSM) — no key pair needed, more secure</li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-num">7</div>
+        <h3>Host a static website on S3</h3>
+        <p>S3 can serve HTML, CSS, and JavaScript files as a website — no server needed. It's the easiest way to get a site live on AWS.</p>
+        <ul>
+          <li>Create an S3 bucket with the same name as your domain</li>
+          <li>Enable "Static website hosting" in bucket properties</li>
+          <li>Upload your index.html and assets</li>
+          <li>Make the bucket public (or use CloudFront with OAC for better security)</li>
+          <li>Point your domain (via Route 53) to the S3 website endpoint or CloudFront</li>
+          <li>Add a free HTTPS certificate via ACM and attach it to CloudFront</li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-num">8</div>
+        <h3>Set up billing alerts to avoid surprise charges</h3>
+        <p>Unexpected AWS bills are the #1 fear of new learners. Set these up before anything else and you'll never be caught off-guard.</p>
+        <ul>
+          <li>Go to AWS Budgets → Create Budget → Zero-spend budget or Monthly cost budget</li>
+          <li>Set threshold at $5 — you'll get an email the moment anything is charged</li>
+          <li>Enable "Free Tier usage alerts" in Billing preferences</li>
+          <li>Check the Cost Explorer dashboard weekly to understand what's running</li>
+          <li>Always stop or terminate resources you're not using — especially EC2 and RDS</li>
+          <li>Use the Trusted Advisor free checks for cost optimisation tips</li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-num">9</div>
+        <h3>Learn the 5 core services in depth</h3>
+        <p>You don't need to learn all 200+ AWS services. Master these 5 first and you can build almost anything.</p>
+        <ul>
+          <li><strong>EC2</strong> — virtual servers. Understand instances, AMIs, security groups, and key pairs</li>
+          <li><strong>S3</strong> — object storage. Buckets, objects, policies, versioning, and lifecycle rules</li>
+          <li><strong>IAM</strong> — permissions. Users, groups, roles, and policies (least privilege is key)</li>
+          <li><strong>VPC</strong> — networking. Subnets, route tables, internet gateways, and security groups</li>
+          <li><strong>RDS</strong> — databases. Managed MySQL/PostgreSQL with backups and Multi-AZ failover</li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-num">10</div>
+        <h3>Build a simple 3-tier architecture</h3>
+        <p>The classic AWS pattern: a CloudFront CDN in front, an ALB routing to EC2 web servers, and an RDS database in a private subnet. Understanding this unlocks 80% of AWS use cases.</p>
+        <ul>
+          <li><strong>Presentation layer</strong> — CloudFront CDN serving static assets from S3</li>
+          <li><strong>Application layer</strong> — EC2 instances (or Lambda) behind an ALB in public subnets</li>
+          <li><strong>Data layer</strong> — RDS or DynamoDB in private subnets (no internet access)</li>
+          <li>Use security groups to enforce: internet → ALB → EC2 → RDS only</li>
+          <li>Add Auto Scaling to EC2 to handle traffic spikes automatically</li>
+          <li>Use CloudWatch alarms to alert on CPU, errors, and latency</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="guide-tip">
+      <div class="guide-tip-icon">💡</div>
+      <div>
+        <strong class="tip-title">Pro tip: Use the AWS Free Tier wisely</strong>
+        The Free Tier gives you 12 months of EC2 (750 hrs/mo), S3 (5 GB), and RDS (750 hrs/mo) — plus permanent free tiers for Lambda, DynamoDB, and more. Set up billing alerts, stop instances when not in use, and you can learn AWS without spending a cent.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What to learn next -->
+<section class="section-white">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">Next steps</p>
+      <h2>Where to go after the basics.</h2>
+    </div>
+    <div class="next-grid">
+      <div class="next-card">
+        <div class="next-icon">📜</div>
+        <h3>Get AWS Certified</h3>
+        <p>The AWS Cloud Practitioner certification is ideal for beginners. Study the core services, pricing model, and security basics. Most learners pass in 4–6 weeks of part-time study.</p>
+      </div>
+      <div class="next-card">
+        <div class="next-icon">🏗️</div>
+        <h3>Build a Real Project</h3>
+        <p>Deploy a full-stack app: S3 frontend + API Gateway + Lambda backend + DynamoDB database. Doing beats reading — you'll learn more in a weekend of building than months of tutorials.</p>
+      </div>
+      <div class="next-card">
+        <div class="next-icon">🔒</div>
+        <h3>Learn Security Fundamentals</h3>
+        <p>Understand IAM least privilege, VPC network isolation, encryption at rest and in transit, and CloudTrail audit logging. Security is the most important skill in cloud engineering.</p>
+      </div>
+      <div class="next-card">
+        <div class="next-icon">🚀</div>
+        <h3>Automate with IaC</h3>
+        <p>Learn CloudFormation or CDK to define infrastructure as code. Stop clicking in the console — version-control your infrastructure alongside your application code.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <h2>Keep the reference handy.</h2>
+    <p>Bookmark the services page — every service you'll encounter, explained simply.</p>
+    <div class="cta-buttons">
+      <a href="services.html" class="button button-primary">Browse All Services</a>
+      <a href="cheatsheet.html" class="button button-secondary">Open Cheatsheet</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand">☁️ AWS Quick Reference</div>
+        <p>A practical guide to getting started with AWS — from account creation to your first deployed application.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="getting-started.html">Getting Started</a></li>
+          <li><a href="cheatsheet.html">Cheatsheet</a></li>
+          <li><a href="services.html">All Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html?cat=compute">Compute</a></li>
+          <li><a href="services.html?cat=security">Security</a></li>
+          <li><a href="services.html?cat=devops">DevOps</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Group 13 Capstone Project</span>
+      <span>Deployed on <strong class="aws-accent">AWS</strong></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

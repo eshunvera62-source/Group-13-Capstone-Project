@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS Cheatsheet — AWS Quick Reference</title>
+  <meta name="description" content="AWS quick reference cheatsheet — ports, regions, free tier limits, CLI commands, and IAM policy structure.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../index.html" class="brand"><span class="brand-icon">☁️</span> AWS Quick Reference</a>
+    <nav class="main-nav">
+      <a href="../index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="cheatsheet.html" class="active">Cheatsheet</a>
+      <a href="getting-started.html" class="nav-cta">Get Started</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <p class="eyebrow">Reference</p>
+    <h1>AWS Cheatsheet</h1>
+    <p>Ports, regions, free tier limits, CLI commands, and IAM structure — at a glance.</p>
+  </div>
+</div>
+
+<section class="cheatsheet-section">
+  <div class="container">
+    <div class="cheat-grid">
+
+      <!-- Common ports -->
+      <div class="cheat-card">
+        <div class="cheat-card-header"><span>🔌</span> Common Ports to Know</div>
+        <table class="cheat-table">
+          <thead><tr><th>Port</th><th>Protocol</th><th>Service</th></tr></thead>
+          <tbody>
+            <tr><td><code>22</code></td><td>TCP</td><td>SSH — remote server access</td></tr>
+            <tr><td><code>80</code></td><td>TCP</td><td>HTTP — web traffic</td></tr>
+            <tr><td><code>443</code></td><td>TCP</td><td>HTTPS — secure web traffic</td></tr>
+            <tr><td><code>3306</code></td><td>TCP</td><td>MySQL / Aurora MySQL</td></tr>
+            <tr><td><code>5432</code></td><td>TCP</td><td>PostgreSQL / Aurora PostgreSQL</td></tr>
+            <tr><td><code>1433</code></td><td>TCP</td><td>Microsoft SQL Server</td></tr>
+            <tr><td><code>6379</code></td><td>TCP</td><td>Redis (ElastiCache)</td></tr>
+            <tr><td><code>11211</code></td><td>TCP</td><td>Memcached (ElastiCache)</td></tr>
+            <tr><td><code>27017</code></td><td>TCP</td><td>MongoDB / DocumentDB</td></tr>
+            <tr><td><code>2049</code></td><td>TCP</td><td>NFS (EFS file system)</td></tr>
+            <tr><td><code>8080</code></td><td>TCP</td><td>HTTP alternate (dev servers)</td></tr>
+            <tr><td><code>8443</code></td><td>TCP</td><td>HTTPS alternate</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Free tier limits -->
+      <div class="cheat-card">
+        <div class="cheat-card-header"><span>💸</span> AWS Free Tier Limits</div>
+        <table class="cheat-table">
+          <thead><tr><th>Service</th><th>Free Allowance</th><th>Duration</th></tr></thead>
+          <tbody>
+            <tr><td>EC2</td><td>750 hrs/mo t2.micro or t3.micro</td><td>12 months</td></tr>
+            <tr><td>S3</td><td>5 GB + 20K GET + 2K PUT requests</td><td>12 months</td></tr>
+            <tr><td>RDS</td><td>750 hrs/mo db.t3.micro (20 GB)</td><td>12 months</td></tr>
+            <tr><td>CloudFront</td><td>1 TB transfer + 10M requests</td><td>12 months</td></tr>
+            <tr><td>Lambda</td><td>1M requests + 400K GB-seconds</td><td>Always free</td></tr>
+            <tr><td>DynamoDB</td><td>25 GB + 25 WCU + 25 RCU</td><td>Always free</td></tr>
+            <tr><td>SNS</td><td>1M publishes</td><td>Always free</td></tr>
+            <tr><td>SQS</td><td>1M requests</td><td>Always free</td></tr>
+            <tr><td>CloudWatch</td><td>10 metrics + 5 GB logs</td><td>Always free</td></tr>
+            <tr><td>Cognito</td><td>50,000 MAU</td><td>Always free</td></tr>
+            <tr><td>API Gateway</td><td>1M API calls/mo</td><td>12 months</td></tr>
+            <tr><td>EBS</td><td>30 GB SSD (gp2/gp3)</td><td>12 months</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Regions -->
+      <div class="cheat-card">
+        <div class="cheat-card-header"><span>🗺️</span> AWS Regions — Key Locations</div>
+        <table class="cheat-table">
+          <thead><tr><th>Region Code</th><th>Location</th><th>AZs</th></tr></thead>
+          <tbody>
+            <tr><td><code>us-east-1</code></td><td>N. Virginia (oldest, most services)</td><td>6</td></tr>
+            <tr><td><code>us-east-2</code></td><td>Ohio</td><td>3</td></tr>
+            <tr><td><code>us-west-1</code></td><td>N. California</td><td>2</td></tr>
+            <tr><td><code>us-west-2</code></td><td>Oregon</td><td>4</td></tr>
+            <tr><td><code>eu-west-1</code></td><td>Ireland</td><td>3</td></tr>
+            <tr><td><code>eu-west-2</code></td><td>London</td><td>3</td></tr>
+            <tr><td><code>eu-central-1</code></td><td>Frankfurt</td><td>3</td></tr>
+            <tr><td><code>ap-southeast-1</code></td><td>Singapore</td><td>3</td></tr>
+            <tr><td><code>ap-southeast-2</code></td><td>Sydney</td><td>3</td></tr>
+            <tr><td><code>ap-northeast-1</code></td><td>Tokyo</td><td>4</td></tr>
+            <tr><td><code>ap-south-1</code></td><td>Mumbai</td><td>3</td></tr>
+            <tr><td><code>sa-east-1</code></td><td>São Paulo</td><td>3</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- IAM policy structure -->
+      <div class="cheat-card">
+        <div class="cheat-card-header"><span>🔒</span> IAM Policy Structure</div>
+        <table class="cheat-table">
+          <thead><tr><th>Element</th><th>Purpose</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td><code>Effect</code></td><td>Allow or Deny</td><td><code>Allow</code></td></tr>
+            <tr><td><code>Action</code></td><td>What API calls</td><td><code>s3:GetObject</code></td></tr>
+            <tr><td><code>Resource</code></td><td>Which resources</td><td><code>arn:aws:s3:::my-bucket/*</code></td></tr>
+            <tr><td><code>Condition</code></td><td>When it applies</td><td>IP range, MFA, tag</td></tr>
+            <tr><td><code>Principal</code></td><td>Who gets access</td><td>IAM user, role, service</td></tr>
+            <tr><td><code>NotAction</code></td><td>All except these</td><td>Deny all but billing</td></tr>
+            <tr><td><code>*</code> wildcard</td><td>All actions/resources</td><td><code>s3:*</code></td></tr>
+          </tbody>
+        </table>
+        <div class="code-block-pad">
+          <pre class="cmd-block"><code>{
+  <span class="cmd-comment">"Version": "2012-10-17",</span>
+  "Statement": [{
+    "Effect": "Allow",
+    "Action": ["s3:GetObject"],
+    "Resource": "arn:aws:s3:::my-bucket/*"
+  }]
+}</code></pre>
+        </div>
+      </div>
+
+      <!-- Common CLI commands -->
+      <div class="cheat-card cheat-card-full">
+        <div class="cheat-card-header"><span>💻</span> Essential AWS CLI Commands</div>
+        <table class="cheat-table">
+          <thead><tr><th>Task</th><th>Command</th></tr></thead>
+          <tbody>
+            <tr><td>Configure credentials</td><td><code>aws configure</code></td></tr>
+            <tr><td>List S3 buckets</td><td><code>aws s3 ls</code></td></tr>
+            <tr><td>Sync folder to S3</td><td><code>aws s3 sync ./dist s3://my-bucket --delete</code></td></tr>
+            <tr><td>List EC2 instances</td><td><code>aws ec2 describe-instances --query 'Reservations[*].Instances[*].{ID:InstanceId,State:State.Name}'</code></td></tr>
+            <tr><td>Start EC2 instance</td><td><code>aws ec2 start-instances --instance-ids i-1234567890abcdef</code></td></tr>
+            <tr><td>SSM into instance</td><td><code>aws ssm start-session --target i-1234567890abcdef</code></td></tr>
+            <tr><td>Run SSM command</td><td><code>aws ssm send-command --instance-ids i-xxx --document-name "AWS-RunShellScript" --parameters 'commands=["uptime"]'</code></td></tr>
+            <tr><td>List IAM users</td><td><code>aws iam list-users --query 'Users[*].UserName' --output text</code></td></tr>
+            <tr><td>Get caller identity</td><td><code>aws sts get-caller-identity</code></td></tr>
+            <tr><td>Invalidate CloudFront</td><td><code>aws cloudfront create-invalidation --distribution-id EXXX --paths "/*"</code></td></tr>
+            <tr><td>Tail CloudWatch logs</td><td><code>aws logs tail /aws/lambda/my-function --follow</code></td></tr>
+            <tr><td>Put item in DynamoDB</td><td><code>aws dynamodb put-item --table-name Users --item '{"id":{"S":"1"},"name":{"S":"Alice"}}'</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Key concepts -->
+      <div class="cheat-card">
+        <div class="cheat-card-header"><span>📖</span> Key AWS Concepts</div>
+        <table class="cheat-table">
+          <thead><tr><th>Term</th><th>What it means</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Region</strong></td><td>Geographic area with multiple data centres</td></tr>
+            <tr><td><strong>AZ</strong></td><td>Availability Zone — isolated data centre within a region</td></tr>
+            <tr><td><strong>ARN</strong></td><td>Amazon Resource Name — unique ID for every AWS resource</td></tr>
+            <tr><td><strong>IAM Role</strong></td><td>Permissions that an AWS service or user can assume temporarily</td></tr>
+            <tr><td><strong>Security Group</strong></td><td>Virtual firewall controlling inbound/outbound traffic</td></tr>
+            <tr><td><strong>CIDR</strong></td><td>IP range notation — <code>10.0.0.0/16</code> = 65,536 IPs</td></tr>
+            <tr><td><strong>Subnet</strong></td><td>Segment of a VPC IP range in a single AZ</td></tr>
+            <tr><td><strong>IGW</strong></td><td>Internet Gateway — allows VPC traffic to reach the internet</td></tr>
+            <tr><td><strong>NAT Gateway</strong></td><td>Lets private subnet instances connect out but not in</td></tr>
+            <tr><td><strong>OAC</strong></td><td>Origin Access Control — CloudFront-only S3 access</td></tr>
+            <tr><td><strong>ACM</strong></td><td>AWS Certificate Manager — free SSL/TLS certs</td></tr>
+            <tr><td><strong>SLA</strong></td><td>Service Level Agreement — AWS uptime guarantee per service</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Architecture decision guide -->
+      <div class="cheat-card">
+        <div class="cheat-card-header"><span>🤔</span> Which Service Should I Use?</div>
+        <table class="cheat-table">
+          <thead><tr><th>If you need to…</th><th>Use this</th></tr></thead>
+          <tbody>
+            <tr><td>Run a web server</td><td>EC2 or Elastic Beanstalk</td></tr>
+            <tr><td>Run code without a server</td><td>Lambda</td></tr>
+            <tr><td>Store files and images</td><td>S3</td></tr>
+            <tr><td>Store relational data (SQL)</td><td>RDS or Aurora</td></tr>
+            <tr><td>Store flexible JSON data</td><td>DynamoDB</td></tr>
+            <tr><td>Cache database results</td><td>ElastiCache (Redis)</td></tr>
+            <tr><td>Speed up a static website globally</td><td>CloudFront + S3</td></tr>
+            <tr><td>Route a domain name</td><td>Route 53</td></tr>
+            <tr><td>Balance traffic across servers</td><td>ALB (Application Load Balancer)</td></tr>
+            <tr><td>Create an HTTP API</td><td>API Gateway + Lambda</td></tr>
+            <tr><td>Send emails or SMS</td><td>SNS or SES</td></tr>
+            <tr><td>Queue jobs between services</td><td>SQS</td></tr>
+            <tr><td>Monitor your resources</td><td>CloudWatch</td></tr>
+            <tr><td>Audit API calls</td><td>CloudTrail</td></tr>
+            <tr><td>Define infrastructure as code</td><td>CloudFormation or CDK</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <h2>Ready to put this into practice?</h2>
+    <p>Follow our step-by-step getting started guide and deploy your first AWS workload.</p>
+    <div class="cta-buttons">
+      <a href="getting-started.html" class="button button-primary">Get Started Guide</a>
+      <a href="services.html" class="button button-secondary">Browse All Services</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand">☁️ AWS Quick Reference</div>
+        <p>A practical cheatsheet for AWS developers and learners — ports, regions, limits, and CLI commands in one place.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Reference</h4>
+        <ul>
+          <li><a href="services.html">All Services</a></li>
+          <li><a href="cheatsheet.html">Cheatsheet</a></li>
+          <li><a href="getting-started.html">Getting Started</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="services.html?cat=compute">Compute</a></li>
+          <li><a href="services.html?cat=storage">Storage</a></li>
+          <li><a href="services.html?cat=security">Security</a></li>
+          <li><a href="services.html?cat=devops">DevOps</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Group 13 Capstone Project</span>
+      <span>Deployed on <strong class="aws-accent">AWS</strong></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

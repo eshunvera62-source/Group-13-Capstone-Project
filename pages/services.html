@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS Services Reference — AWS Quick Reference</title>
+  <meta name="description" content="Complete reference for 35+ AWS services — searchable and filterable by category.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="../index.html" class="brand"><span class="brand-icon">☁️</span> AWS Quick Reference</a>
+    <nav class="main-nav">
+      <a href="../index.html">Home</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="cheatsheet.html">Cheatsheet</a>
+      <a href="getting-started.html" class="nav-cta">Get Started</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <p class="eyebrow">Reference</p>
+    <h1>AWS Services Catalog</h1>
+    <p>35+ services explained in plain English — with use cases and free tier info.</p>
+  </div>
+</div>
+
+<section class="services-section">
+  <div class="container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search services…" oninput="filterServices()">
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterCat('all', this)">All Services</button>
+      <button class="filter-btn" onclick="filterCat('compute', this)">⚡ Compute</button>
+      <button class="filter-btn" onclick="filterCat('storage', this)">🗄️ Storage</button>
+      <button class="filter-btn" onclick="filterCat('database', this)">🛢️ Database</button>
+      <button class="filter-btn" onclick="filterCat('networking', this)">🌐 Networking</button>
+      <button class="filter-btn" onclick="filterCat('security', this)">🔒 Security</button>
+      <button class="filter-btn" onclick="filterCat('monitoring', this)">📊 Monitoring</button>
+      <button class="filter-btn" onclick="filterCat('devops', this)">🚀 DevOps</button>
+      <button class="filter-btn" onclick="filterCat('messaging', this)">📨 Messaging</button>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+      <p class="no-results" id="noResults">No services match your search. Try a different term.</p>
+
+      <!-- COMPUTE -->
+      <div class="service-card" data-cat="compute" data-tags="ec2 elastic compute cloud virtual server instance vm">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-compute">⚡</div>
+          <div>
+            <div class="service-name">EC2</div>
+            <div class="service-fullname">Elastic Compute Cloud</div>
+            <span class="cat-badge" class="badge-compute">Compute</span>
+          </div>
+        </div>
+        <p class="service-desc">Resizable virtual machines in the cloud. Pick your CPU, RAM, storage, and OS. The foundation of most AWS workloads.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Web and application servers</li>
+          <li>Batch processing and HPC</li>
+          <li>Development and testing</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 750 hrs/mo t2.micro (12 mo)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="compute" data-tags="lambda serverless function faas event">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-compute">λ</div>
+          <div>
+            <div class="service-name">Lambda</div>
+            <div class="service-fullname">AWS Lambda</div>
+            <span class="cat-badge" class="badge-compute">Compute</span>
+          </div>
+        </div>
+        <p class="service-desc">Run code in response to events without managing servers. Automatically scales from zero to peak demand. Pay per millisecond of execution.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>API backends with API Gateway</li>
+          <li>S3 / DynamoDB event triggers</li>
+          <li>Scheduled cron-style tasks</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 1M requests/mo — always free</span></div>
+      </div>
+
+      <div class="service-card" data-cat="compute" data-tags="ecs elastic container service docker fargate">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-compute">🐳</div>
+          <div>
+            <div class="service-name">ECS</div>
+            <div class="service-fullname">Elastic Container Service</div>
+            <span class="cat-badge" class="badge-compute">Compute</span>
+          </div>
+        </div>
+        <p class="service-desc">Run Docker containers at scale. Use EC2 instances you manage or Fargate for fully serverless containers. Deep AWS integration.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Microservices architectures</li>
+          <li>Containerised web apps</li>
+          <li>CI/CD pipeline workloads</li>
+        </ul>
+        <div class="service-footer"><span class="no-free">No free tier (Fargate charges apply)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="compute" data-tags="eks kubernetes k8s container orchestration">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-compute">⚙️</div>
+          <div>
+            <div class="service-name">EKS</div>
+            <div class="service-fullname">Elastic Kubernetes Service</div>
+            <span class="cat-badge" class="badge-compute">Compute</span>
+          </div>
+        </div>
+        <p class="service-desc">Managed Kubernetes. AWS runs the control plane so you focus on deploying workloads. Integrates with IAM, VPC, ALB, and ECR.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Large-scale container orchestration</li>
+          <li>Hybrid on-prem and cloud deployments</li>
+          <li>Multi-team platform engineering</li>
+        </ul>
+        <div class="service-footer"><span class="no-free">$0.10/hr per cluster control plane</span></div>
+      </div>
+
+      <div class="service-card" data-cat="compute" data-tags="elastic beanstalk paas deploy app heroku-like">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-compute">🌱</div>
+          <div>
+            <div class="service-name">Elastic Beanstalk</div>
+            <div class="service-fullname">AWS Elastic Beanstalk</div>
+            <span class="cat-badge" class="badge-compute">Compute</span>
+          </div>
+        </div>
+        <p class="service-desc">Deploy and scale web apps without managing infrastructure. Upload your code and Beanstalk handles load balancing, auto-scaling, and health monitoring.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Rapid app deployment (Node, Python, Java, PHP)</li>
+          <li>Teams wanting PaaS simplicity on AWS</li>
+          <li>Prototype to production quickly</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ Free (pay only for EC2/RDS underneath)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="compute" data-tags="lightsail vps simple virtual private server wordpress">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-compute">💡</div>
+          <div>
+            <div class="service-name">Lightsail</div>
+            <div class="service-fullname">Amazon Lightsail</div>
+            <span class="cat-badge" class="badge-compute">Compute</span>
+          </div>
+        </div>
+        <p class="service-desc">Simple, low-cost virtual private servers. Fixed monthly pricing with predictable costs — great for small sites and beginners migrating from shared hosting.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>WordPress and CMS sites</li>
+          <li>Dev and test environments</li>
+          <li>Simple web apps with fixed budget</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 3 months free on select plans</span></div>
+      </div>
+
+      <!-- STORAGE -->
+      <div class="service-card" data-cat="storage" data-tags="s3 simple storage service object bucket file">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-storage">🗄️</div>
+          <div>
+            <div class="service-name">S3</div>
+            <div class="service-fullname">Simple Storage Service</div>
+            <span class="cat-badge" class="badge-storage">Storage</span>
+          </div>
+        </div>
+        <p class="service-desc">Infinitely scalable object storage with 11 nines of durability. Store any type of file and serve it globally via URL or CloudFront CDN.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Static website hosting</li>
+          <li>Media and asset storage</li>
+          <li>Data lake and analytics source</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 5 GB + 20K GET requests/mo (12 mo)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="storage" data-tags="ebs elastic block store volume disk ssd hdd">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-storage">💾</div>
+          <div>
+            <div class="service-name">EBS</div>
+            <div class="service-fullname">Elastic Block Store</div>
+            <span class="cat-badge" class="badge-storage">Storage</span>
+          </div>
+        </div>
+        <p class="service-desc">Persistent block-level storage volumes for EC2. Like an external hard drive that stays even when your instance stops. Supports SSD and HDD types.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>OS and application disk for EC2</li>
+          <li>Database storage (MySQL, PostgreSQL)</li>
+          <li>Boot volumes requiring fast IOPS</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 30 GB SSD storage (12 mo)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="storage" data-tags="efs elastic file system nfs shared network">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-storage">📁</div>
+          <div>
+            <div class="service-name">EFS</div>
+            <div class="service-fullname">Elastic File System</div>
+            <span class="cat-badge" class="badge-storage">Storage</span>
+          </div>
+        </div>
+        <p class="service-desc">Fully managed NFS file system that can be mounted by many EC2 instances simultaneously. Scales automatically — you pay only for what you use.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Shared storage for web server fleets</li>
+          <li>Content management and media processing</li>
+          <li>Container and Lambda shared storage</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 5 GB Standard storage/mo (12 mo)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="storage" data-tags="glacier archive cold backup long-term cheap">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-storage">🧊</div>
+          <div>
+            <div class="service-name">S3 Glacier</div>
+            <div class="service-fullname">Amazon S3 Glacier</div>
+            <span class="cat-badge" class="badge-storage">Storage</span>
+          </div>
+        </div>
+        <p class="service-desc">Ultra-low-cost archival storage — as cheap as $0.004/GB/month. Trade retrieval speed (minutes to hours) for massive cost savings on infrequently accessed data.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Compliance and audit record retention</li>
+          <li>Long-term database backups</li>
+          <li>Media archive libraries</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 10 GB retrievals/mo (12 mo)</span></div>
+      </div>
+
+      <!-- DATABASE -->
+      <div class="service-card" data-cat="database" data-tags="rds relational database mysql postgresql mariadb oracle sql">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-database">🛢️</div>
+          <div>
+            <div class="service-name">RDS</div>
+            <div class="service-fullname">Relational Database Service</div>
+            <span class="cat-badge" class="badge-database">Database</span>
+          </div>
+        </div>
+        <p class="service-desc">Managed relational databases. AWS automates backups, patching, and failover. Supports MySQL, PostgreSQL, MariaDB, Oracle, and SQL Server.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Web application backends</li>
+          <li>Multi-AZ high-availability setups</li>
+          <li>Read replicas for scaling reads</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 750 hrs/mo db.t3.micro (12 mo)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="database" data-tags="dynamodb nosql key value document serverless">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-database">⚡</div>
+          <div>
+            <div class="service-name">DynamoDB</div>
+            <div class="service-fullname">Amazon DynamoDB</div>
+            <span class="cat-badge" class="badge-database">Database</span>
+          </div>
+        </div>
+        <p class="service-desc">Fully managed, serverless NoSQL database. Single-digit millisecond performance at any scale. No schema — store JSON-like documents or key-value pairs.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>User profiles and session stores</li>
+          <li>Gaming leaderboards and IoT telemetry</li>
+          <li>Shopping cart and e-commerce data</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 25 GB + 25 WCU/RCU — always free</span></div>
+      </div>
+
+      <div class="service-card" data-cat="database" data-tags="aurora mysql postgresql serverless cloud native fast">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-database">🌟</div>
+          <div>
+            <div class="service-name">Aurora</div>
+            <div class="service-fullname">Amazon Aurora</div>
+            <span class="cat-badge" class="badge-database">Database</span>
+          </div>
+        </div>
+        <p class="service-desc">AWS's cloud-native relational database. Up to 5× faster than MySQL and 3× faster than PostgreSQL. Auto-scales storage up to 128 TB with zero downtime.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>High-throughput SaaS applications</li>
+          <li>Replacing on-prem Oracle/MySQL</li>
+          <li>Aurora Serverless for variable workloads</li>
+        </ul>
+        <div class="service-footer"><span class="no-free">No free tier</span></div>
+      </div>
+
+      <div class="service-card" data-cat="database" data-tags="elasticache redis memcached cache in-memory">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-database">🚀</div>
+          <div>
+            <div class="service-name">ElastiCache</div>
+            <div class="service-fullname">Amazon ElastiCache</div>
+            <span class="cat-badge" class="badge-database">Database</span>
+          </div>
+        </div>
+        <p class="service-desc">Managed in-memory caching with Redis or Memcached. Cut database load by caching frequent queries. Sub-millisecond response times.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Session and token caching</li>
+          <li>Database query result caching</li>
+          <li>Real-time leaderboards with Redis sorted sets</li>
+        </ul>
+        <div class="service-footer"><span class="no-free">No free tier</span></div>
+      </div>
+
+      <div class="service-card" data-cat="database" data-tags="redshift data warehouse analytics sql petabyte">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-database">📊</div>
+          <div>
+            <div class="service-name">Redshift</div>
+            <div class="service-fullname">Amazon Redshift</div>
+            <span class="cat-badge" class="badge-database">Database</span>
+          </div>
+        </div>
+        <p class="service-desc">Petabyte-scale cloud data warehouse. Query massive datasets with standard SQL. Integrates with S3, Athena, and BI tools like Tableau and QuickSight.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Business intelligence and reporting</li>
+          <li>Consolidating data from multiple sources</li>
+          <li>Historical trend analysis</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 2-month free trial (dc2.large)</span></div>
+      </div>
+
+      <!-- NETWORKING -->
+      <div class="service-card" data-cat="networking" data-tags="vpc virtual private cloud network subnet security group">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-network">🌐</div>
+          <div>
+            <div class="service-name">VPC</div>
+            <div class="service-fullname">Virtual Private Cloud</div>
+            <span class="cat-badge" class="badge-network">Networking</span>
+          </div>
+        </div>
+        <p class="service-desc">Your own isolated private network inside AWS. Control IP ranges, create public and private subnets, configure route tables and internet gateways.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Isolate production from dev environments</li>
+          <li>Private subnets for databases and backends</li>
+          <li>VPN/Direct Connect to on-premises</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ VPC is free (NAT Gateway charges apply)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="networking" data-tags="cloudfront cdn content delivery network edge cache static">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-network">⚡</div>
+          <div>
+            <div class="service-name">CloudFront</div>
+            <div class="service-fullname">Amazon CloudFront</div>
+            <span class="cat-badge" class="badge-network">Networking</span>
+          </div>
+        </div>
+        <p class="service-desc">Global content delivery network (CDN) with 450+ edge locations. Serve content from the closest location to your user for faster load times and DDoS protection.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Accelerate S3 static websites</li>
+          <li>HTTPS termination with ACM certs</li>
+          <li>Protect origins with WAF and Shield</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 1 TB transfer + 10M requests/mo (12 mo)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="networking" data-tags="route 53 dns domain name system routing">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-network">🗺️</div>
+          <div>
+            <div class="service-name">Route 53</div>
+            <div class="service-fullname">Amazon Route 53</div>
+            <span class="cat-badge" class="badge-network">Networking</span>
+          </div>
+        </div>
+        <p class="service-desc">Scalable DNS and domain registration. Route traffic with policies like latency-based, weighted, geolocation, and failover. 100% SLA uptime.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Custom domain routing to CloudFront/ALB</li>
+          <li>Health-check-based failover</li>
+          <li>Internal DNS for private VPCs</li>
+        </ul>
+        <div class="service-footer"><span class="no-free">$0.50/hosted zone/mo</span></div>
+      </div>
+
+      <div class="service-card" data-cat="networking" data-tags="alb elb load balancer application network traffic distribute">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-network">⚖️</div>
+          <div>
+            <div class="service-name">ALB / ELB</div>
+            <div class="service-fullname">Application / Elastic Load Balancer</div>
+            <span class="cat-badge" class="badge-network">Networking</span>
+          </div>
+        </div>
+        <p class="service-desc">Distribute incoming traffic across multiple EC2 instances, containers, or Lambda functions. ALB supports HTTP/HTTPS routing rules; NLB handles TCP/UDP at ultra-low latency.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>High-availability web app traffic distribution</li>
+          <li>Path-based routing (/api → service A)</li>
+          <li>SSL termination and health checking</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 750 hrs/mo Classic LB (12 mo)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="networking" data-tags="api gateway rest http websocket endpoint">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-network">🔌</div>
+          <div>
+            <div class="service-name">API Gateway</div>
+            <div class="service-fullname">Amazon API Gateway</div>
+            <span class="cat-badge" class="badge-network">Networking</span>
+          </div>
+        </div>
+        <p class="service-desc">Create, publish, and manage REST, HTTP, and WebSocket APIs at any scale. Acts as the front door to Lambda, EC2, or any HTTP backend.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Serverless REST APIs with Lambda</li>
+          <li>Rate limiting and API key management</li>
+          <li>WebSocket real-time apps (chat, dashboards)</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 1M API calls/mo (12 mo)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="networking" data-tags="direct connect dedicated line private on premises hybrid">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-network">🔗</div>
+          <div>
+            <div class="service-name">Direct Connect</div>
+            <div class="service-fullname">AWS Direct Connect</div>
+            <span class="cat-badge" class="badge-network">Networking</span>
+          </div>
+        </div>
+        <p class="service-desc">Dedicated private network connection from your data centre to AWS. More consistent latency and bandwidth than public internet VPN — ideal for large data transfers.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Hybrid cloud with consistent performance</li>
+          <li>Migrating large datasets to AWS</li>
+          <li>Reducing egress data transfer costs</li>
+        </ul>
+        <div class="service-footer"><span class="no-free">No free tier — charged per port hour</span></div>
+      </div>
+
+      <!-- SECURITY -->
+      <div class="service-card" data-cat="security" data-tags="iam identity access management user role policy permission">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-security">🔒</div>
+          <div>
+            <div class="service-name">IAM</div>
+            <div class="service-fullname">Identity and Access Management</div>
+            <span class="cat-badge" class="badge-security">Security</span>
+          </div>
+        </div>
+        <p class="service-desc">The foundation of AWS security. Create users, groups, and roles. Attach JSON policies to grant or deny access to any AWS service or action.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Least-privilege access for team members</li>
+          <li>Service roles (EC2 reads S3, Lambda writes DynamoDB)</li>
+          <li>MFA enforcement and password policies</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ Always free</span></div>
+      </div>
+
+      <div class="service-card" data-cat="security" data-tags="kms key management service encryption secret key">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-security">🗝️</div>
+          <div>
+            <div class="service-name">KMS</div>
+            <div class="service-fullname">Key Management Service</div>
+            <span class="cat-badge" class="badge-security">Security</span>
+          </div>
+        </div>
+        <p class="service-desc">Create and control encryption keys used to protect your data. Integrates with S3, EBS, RDS, Lambda, and most AWS services. FIPS 140-2 validated.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Encrypt S3 buckets and EBS volumes</li>
+          <li>Database encryption at rest</li>
+          <li>Application-level encryption</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 20K requests/mo free</span></div>
+      </div>
+
+      <div class="service-card" data-cat="security" data-tags="waf web application firewall sql injection xss rule">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-security">🛡️</div>
+          <div>
+            <div class="service-name">WAF</div>
+            <div class="service-fullname">AWS Web Application Firewall</div>
+            <span class="cat-badge" class="badge-security">Security</span>
+          </div>
+        </div>
+        <p class="service-desc">Filter malicious web traffic before it reaches your app. Block SQL injection, XSS, bad bots, and rate-limit abusers. Attaches to CloudFront, ALB, or API Gateway.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>OWASP Top 10 protection</li>
+          <li>Geo-blocking by country</li>
+          <li>Rate limiting and bot control</li>
+        </ul>
+        <div class="service-footer"><span class="no-free">$5/web ACL/mo + rule charges</span></div>
+      </div>
+
+      <div class="service-card" data-cat="security" data-tags="secrets manager secret password api key rotation credential">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-security">🔐</div>
+          <div>
+            <div class="service-name">Secrets Manager</div>
+            <div class="service-fullname">AWS Secrets Manager</div>
+            <span class="cat-badge" class="badge-security">Security</span>
+          </div>
+        </div>
+        <p class="service-desc">Store and automatically rotate database credentials, API keys, and other secrets. Applications retrieve secrets at runtime — no hardcoded credentials in code.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>RDS password auto-rotation</li>
+          <li>Storing third-party API keys safely</li>
+          <li>Cross-account secret sharing</li>
+        </ul>
+        <div class="service-footer"><span class="no-free">$0.40/secret/mo</span></div>
+      </div>
+
+      <div class="service-card" data-cat="security" data-tags="cognito user pool auth login oauth social federation">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-security">👤</div>
+          <div>
+            <div class="service-name">Cognito</div>
+            <div class="service-fullname">Amazon Cognito</div>
+            <span class="cat-badge" class="badge-security">Security</span>
+          </div>
+        </div>
+        <p class="service-desc">Add sign-up, sign-in, and access control to your apps. Supports social logins (Google, Facebook), SAML, and OIDC. Manages millions of users with JWT tokens.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Mobile and web app authentication</li>
+          <li>Social login (Google, Apple, Facebook)</li>
+          <li>API Gateway authorisation</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 50K MAU free</span></div>
+      </div>
+
+      <!-- MONITORING -->
+      <div class="service-card" data-cat="monitoring" data-tags="cloudwatch metrics logs alarms dashboard monitor">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-monitor">📊</div>
+          <div>
+            <div class="service-name">CloudWatch</div>
+            <div class="service-fullname">Amazon CloudWatch</div>
+            <span class="cat-badge" class="badge-monitor">Monitoring</span>
+          </div>
+        </div>
+        <p class="service-desc">The central monitoring hub for AWS. Collect metrics, aggregate logs, set alarms, and build dashboards. Trigger Auto Scaling or Lambda in response to thresholds.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>CPU/memory alerts and auto-scaling triggers</li>
+          <li>Centralised application log management</li>
+          <li>Operational dashboards</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 10 metrics + 5 GB logs (always free)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="monitoring" data-tags="cloudtrail audit log api call history compliance">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-monitor">🔍</div>
+          <div>
+            <div class="service-name">CloudTrail</div>
+            <div class="service-fullname">AWS CloudTrail</div>
+            <span class="cat-badge" class="badge-monitor">Monitoring</span>
+          </div>
+        </div>
+        <p class="service-desc">Records every API call made in your AWS account — who did what, when, and from where. Essential for security audits, compliance, and incident investigation.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Security incident forensics</li>
+          <li>Compliance reporting (SOC2, PCI-DSS)</li>
+          <li>Detecting unauthorised access</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 90 days event history free</span></div>
+      </div>
+
+      <div class="service-card" data-cat="monitoring" data-tags="config resource compliance rule change configuration drift">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-monitor">⚙️</div>
+          <div>
+            <div class="service-name">Config</div>
+            <div class="service-fullname">AWS Config</div>
+            <span class="cat-badge" class="badge-monitor">Monitoring</span>
+          </div>
+        </div>
+        <p class="service-desc">Continuously assess, audit, and evaluate the configuration of AWS resources. Detect drift from desired state and get notified when something changes unexpectedly.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Detect unencrypted S3 buckets or EBS volumes</li>
+          <li>Compliance dashboards for security teams</li>
+          <li>Change history for every resource</li>
+        </ul>
+        <div class="service-footer"><span class="no-free">$0.003 per config item recorded</span></div>
+      </div>
+
+      <div class="service-card" data-cat="monitoring" data-tags="x-ray tracing distributed trace latency performance">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-monitor">🕵️</div>
+          <div>
+            <div class="service-name">X-Ray</div>
+            <div class="service-fullname">AWS X-Ray</div>
+            <span class="cat-badge" class="badge-monitor">Monitoring</span>
+          </div>
+        </div>
+        <p class="service-desc">Distributed tracing for your applications. Visualise request flows across Lambda, EC2, containers, and databases. Pinpoint latency bottlenecks in microservices.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Debug slow API calls end-to-end</li>
+          <li>Identify errors in distributed services</li>
+          <li>Performance profiling and bottleneck analysis</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 100K traces/mo free</span></div>
+      </div>
+
+      <!-- DEVOPS -->
+      <div class="service-card" data-cat="devops" data-tags="codepipeline ci cd pipeline continuous integration delivery">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-devops">🚀</div>
+          <div>
+            <div class="service-name">CodePipeline</div>
+            <div class="service-fullname">AWS CodePipeline</div>
+            <span class="cat-badge" class="badge-devops">DevOps</span>
+          </div>
+        </div>
+        <p class="service-desc">Fully managed CI/CD pipeline. Automate build, test, and deploy stages triggered by code commits. Integrates with GitHub, CodeBuild, CodeDeploy, and CloudFormation.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Automated deploy on every git push</li>
+          <li>Multi-stage test → staging → production</li>
+          <li>Infrastructure as code deployments</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 1 active pipeline free (12 mo)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="devops" data-tags="codebuild build compile test docker container image">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-devops">🔨</div>
+          <div>
+            <div class="service-name">CodeBuild</div>
+            <div class="service-fullname">AWS CodeBuild</div>
+            <span class="cat-badge" class="badge-devops">DevOps</span>
+          </div>
+        </div>
+        <p class="service-desc">Fully managed build service. Compile code, run tests, and produce deployment artefacts. No build servers to manage — scales automatically with your workload.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Build and push Docker images to ECR</li>
+          <li>Run unit and integration tests</li>
+          <li>Generate deployment packages for CodeDeploy</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 100 build minutes/mo (12 mo)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="devops" data-tags="codedeploy deploy ec2 lambda ecs rolling blue green">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-devops">📦</div>
+          <div>
+            <div class="service-name">CodeDeploy</div>
+            <div class="service-fullname">AWS CodeDeploy</div>
+            <span class="cat-badge" class="badge-devops">DevOps</span>
+          </div>
+        </div>
+        <p class="service-desc">Automate code deployments to EC2, Lambda, or ECS. Supports rolling, blue/green, and canary strategies with automatic rollback on failure.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Zero-downtime rolling deployments</li>
+          <li>Blue/green traffic shifting</li>
+          <li>Automatic rollback on CloudWatch alarms</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ Free for EC2 deployments</span></div>
+      </div>
+
+      <div class="service-card" data-cat="devops" data-tags="cloudformation iac infrastructure as code template stack yaml json">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-devops">📋</div>
+          <div>
+            <div class="service-name">CloudFormation</div>
+            <div class="service-fullname">AWS CloudFormation</div>
+            <span class="cat-badge" class="badge-devops">DevOps</span>
+          </div>
+        </div>
+        <p class="service-desc">Infrastructure as Code for AWS. Define your entire stack (VPC, EC2, RDS, IAM) in YAML or JSON templates and deploy it repeatably across environments.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Repeatable dev/staging/prod environments</li>
+          <li>Version-controlled infrastructure</li>
+          <li>Stack creation with nested templates</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ Free (pay for resources created)</span></div>
+      </div>
+
+      <div class="service-card" data-cat="devops" data-tags="cdk cloud development kit typescript python java code iac">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-devops">💻</div>
+          <div>
+            <div class="service-name">CDK</div>
+            <div class="service-fullname">Cloud Development Kit</div>
+            <span class="cat-badge" class="badge-devops">DevOps</span>
+          </div>
+        </div>
+        <p class="service-desc">Define AWS infrastructure using real programming languages — TypeScript, Python, Java, C#. Compiles down to CloudFormation. Reuse constructs like libraries.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>IaC for developers who prefer code over YAML</li>
+          <li>Shareable infrastructure constructs (npm/PyPI)</li>
+          <li>Type-safe infrastructure definitions</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ Free (pay for resources created)</span></div>
+      </div>
+
+      <!-- MESSAGING -->
+      <div class="service-card" data-cat="messaging" data-tags="sqs queue message simple queue service worker decouple">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-messaging">📨</div>
+          <div>
+            <div class="service-name">SQS</div>
+            <div class="service-fullname">Simple Queue Service</div>
+            <span class="cat-badge" class="badge-messaging">Messaging</span>
+          </div>
+        </div>
+        <p class="service-desc">Fully managed message queue for decoupling components. Producers send messages; consumers process them at their own pace. Handles spikes without dropping messages.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Decouple web tier from processing tier</li>
+          <li>Order processing and job queues</li>
+          <li>Dead-letter queues for failed messages</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 1M requests/mo — always free</span></div>
+      </div>
+
+      <div class="service-card" data-cat="messaging" data-tags="sns notification topic publish subscribe email sms push">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-messaging">🔔</div>
+          <div>
+            <div class="service-name">SNS</div>
+            <div class="service-fullname">Simple Notification Service</div>
+            <span class="cat-badge" class="badge-messaging">Messaging</span>
+          </div>
+        </div>
+        <p class="service-desc">Pub/sub messaging. Publish one message to a topic and fan it out to many subscribers — email, SMS, SQS queues, Lambda functions, or HTTP endpoints.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Alert notifications to on-call engineers</li>
+          <li>Broadcast events to multiple services</li>
+          <li>Mobile push notifications</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ 1M publishes/mo — always free</span></div>
+      </div>
+
+      <div class="service-card" data-cat="messaging" data-tags="eventbridge event bus rule pattern driven saas">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-messaging">🚌</div>
+          <div>
+            <div class="service-name">EventBridge</div>
+            <div class="service-fullname">Amazon EventBridge</div>
+            <span class="cat-badge" class="badge-messaging">Messaging</span>
+          </div>
+        </div>
+        <p class="service-desc">Serverless event bus for routing events between AWS services, custom applications, and SaaS partners. Match events to targets using rules with filter patterns.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Trigger Lambda on AWS service events</li>
+          <li>Scheduled tasks (cron-style rules)</li>
+          <li>SaaS integration (Shopify, Zendesk events)</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ Custom events: 5M free/mo</span></div>
+      </div>
+
+      <div class="service-card" data-cat="messaging" data-tags="kinesis stream real-time data ingestion analytics log">
+        <div class="service-top">
+          <div class="service-icon-wrap" class="icon-messaging">🌊</div>
+          <div>
+            <div class="service-name">Kinesis</div>
+            <div class="service-fullname">Amazon Kinesis</div>
+            <span class="cat-badge" class="badge-messaging">Messaging</span>
+          </div>
+        </div>
+        <p class="service-desc">Collect, process, and analyse real-time streaming data at massive scale. Ideal for log analytics, IoT telemetry, and live dashboards. Data available within milliseconds.</p>
+        <p class="use-cases-label">Common uses</p>
+        <ul class="service-uses">
+          <li>Real-time clickstream and app telemetry</li>
+          <li>IoT sensor data ingestion</li>
+          <li>Live log processing and anomaly detection</li>
+        </ul>
+        <div class="service-footer"><span class="free-tier">✓ Kinesis Firehose 500 TB/mo (12 mo)</span></div>
+      </div>
+
+    </div><!-- /services-grid -->
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand">☁️ AWS Quick Reference</div>
+        <p>35+ AWS services explained in plain English. Use cases, free tier info, and practical examples for every service.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#" onclick="filterCat('compute',null);return false">Compute</a></li>
+          <li><a href="#" onclick="filterCat('storage',null);return false">Storage</a></li>
+          <li><a href="#" onclick="filterCat('database',null);return false">Database</a></li>
+          <li><a href="#" onclick="filterCat('networking',null);return false">Networking</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="cheatsheet.html">Cheatsheet</a></li>
+          <li><a href="getting-started.html">Getting Started</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Group 13 Capstone Project</span>
+      <span>Deployed on <strong class="aws-accent">AWS</strong></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+let activeCat = 'all';
+
+function filterServices() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.service-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const tags = card.dataset.tags || '';
+    const name = card.querySelector('.service-name')?.textContent.toLowerCase() || '';
+    const desc = card.querySelector('.service-desc')?.textContent.toLowerCase() || '';
+    const cat  = card.dataset.cat || '';
+    const matchesSearch = !q || tags.includes(q) || name.includes(q) || desc.includes(q);
+    const matchesCat = activeCat === 'all' || cat === activeCat;
+    if (matchesSearch && matchesCat) { card.classList.remove('hidden'); visible++; }
+    else card.classList.add('hidden');
+  });
+  document.getElementById('noResults').classList.toggle('visible', visible === 0);
+}
+
+function filterCat(cat, btn) {
+  activeCat = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  filterServices();
+  window.scrollTo({ top: document.querySelector('.services-section').offsetTop - 80, behavior: 'smooth' });
+}
+
+// Respect URL params (?cat=compute or ?q=storage)
+const params = new URLSearchParams(location.search);
+if (params.get('q')) { document.getElementById('searchInput').value = params.get('q'); filterServices(); }
+if (params.get('cat')) {
+  activeCat = params.get('cat');
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    if (b.textContent.toLowerCase().includes(activeCat)) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  filterServices();
+}
+</script>
+</body>
+</html>

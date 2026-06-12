@@ -98,8 +98,8 @@ jobs:
 
       - name: Verify health check
         run: |
-          sleep 3
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://${{ env.EC2_HOST }}/health)
+          sleep 5
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 https://group13capstone.online/health)
           if [ "$STATUS" != "200" ]; then
             echo "Health check failed: HTTP $STATUS"
             exit 1

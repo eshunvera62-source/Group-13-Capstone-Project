@@ -1,6 +1,8 @@
-# AWS Quick Reference Guide — Group 13 Capstone
+# AWS Quick Reference Guide
+### End-to-End Cloud Solution Design & Deployment | Group 13 | AWS Cloud Computing Gen 4 Cohort
 
-A searchable, single-page reference guide for common AWS services. Built to solve the problem new AWS learners face: juggling 10+ documentation tabs just to answer a basic question about which service to use and how it fits together.
+## Introduction
+This is a searchable, single-page reference guide for common AWS services. Built to solve the problem new AWS learners face: juggling 10+ documentation tabs just to answer a basic question about which service to use and how it fits together, and the app itself is deployed on the very architecture it describes, making it a working demonstration of AWS best practices.
 
 **Live site:** [https://group13capstone.online](https://group13capstone.online)
 
@@ -113,15 +115,12 @@ The deploy user has least-privilege IAM permissions: S3 sync on the project buck
 
 ---
 
-## Team
+## Team Members — Group 13
+| Name | Role | Responsibilities |
+|---|---|---|
+| Vera | AWS Admin | IAM, VPC, ALB, Security groups, AWS Budgets |
+| Othniel | App Developer | Web app build, EC2 deployment, S3 assets, Deploy Scripts |
+| Kelvin | Security & CDN | CloudFront, ACM, S3 OAC, GitHub Actions, Cloudwatch |
+| Betty | Project Manager & Docs | Architecture diagram, README, Slides, Screenshots, IAM review |
 
-Group 13 — AWS Intern Cohort Capstone
 
-| Name | AWS IAM User |
-| --- | --- |
-| Betty | Betty |
-| Esther | Esther |
-| Ezekiel | Ezekiel |
-| Kelvin | Kelvin |
-| Othniel | Othniel |
-| Vera | Vera |

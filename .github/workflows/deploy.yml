@@ -9,7 +9,7 @@ env:
   AWS_REGION: us-east-1
   S3_BUCKET: group13capstonebucket
   CLOUDFRONT_ID: ECUXP1DUSC95X
-  EC2_HOST: 3.90.216.6
+  TARGET_GROUP_ARN: arn:aws:elasticloadbalancing:us-east-1:230195035490:targetgroup/group13-targetgroup/c310152094d67bf9
 
 jobs:
   deploy-s3:
@@ -52,11 +52,28 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Deploy via SSM Run Command
+      - name: Discover all healthy instances in target group
+        id: targets
+        run: |
+          INSTANCE_IDS=$(aws elbv2 describe-target-health \
+            --target-group-arn ${{ env.TARGET_GROUP_ARN }} \
+            --region ${{ env.AWS_REGION }} \
+            --query 'TargetHealthDescriptions[?TargetHealth.State==`healthy`].Target.Id' \
+            --output text | tr '\t' ' ')
+          echo "instance_ids=$INSTANCE_IDS" >> $GITHUB_OUTPUT
+          echo "Deploying to instances: $INSTANCE_IDS"
+
+      - name: Deploy via SSM to all healthy instances
         id: ssm
         run: |
+          INSTANCE_IDS="${{ steps.targets.outputs.instance_ids }}"
+          if [ -z "$INSTANCE_IDS" ]; then
+            echo "No healthy instances found in target group"
+            exit 1
+          fi
+
           COMMAND_ID=$(aws ssm send-command \
-            --instance-ids i-0f90603b017225cc3 \
+            --instance-ids $INSTANCE_IDS \
             --document-name "AWS-RunShellScript" \
             --parameters 'commands=[
               "set -e",
@@ -74,29 +91,36 @@ jobs:
           echo "command_id=$COMMAND_ID" >> $GITHUB_OUTPUT
           echo "SSM Command ID: $COMMAND_ID"
 
-      - name: Wait for SSM command to complete
+      - name: Wait for SSM command to complete on all instances
         run: |
-          aws ssm wait command-executed \
-            --command-id ${{ steps.ssm.outputs.command_id }} \
-            --instance-id i-0f90603b017225cc3 \
-            --region ${{ env.AWS_REGION }}
+          for INSTANCE_ID in ${{ steps.targets.outputs.instance_ids }}; do
+            echo "Waiting for $INSTANCE_ID..."
+            aws ssm wait command-executed \
+              --command-id ${{ steps.ssm.outputs.command_id }} \
+              --instance-id "$INSTANCE_ID" \
+              --region ${{ env.AWS_REGION }}
+          done
 
-      - name: Check SSM command result
+      - name: Check SSM result on all instances
         run: |
-          RESULT=$(aws ssm get-command-invocation \
-            --command-id ${{ steps.ssm.outputs.command_id }} \
-            --instance-id i-0f90603b017225cc3 \
-            --region ${{ env.AWS_REGION }} \
-            --query '{Status:Status,Output:StandardOutputContent,Error:StandardErrorContent}' \
-            --output json)
-          echo "$RESULT"
-          STATUS=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['Status'])")
-          if [ "$STATUS" != "Success" ]; then
-            echo "SSM command failed with status: $STATUS"
-            exit 1
-          fi
+          FAILED=0
+          for INSTANCE_ID in ${{ steps.targets.outputs.instance_ids }}; do
+            RESULT=$(aws ssm get-command-invocation \
+              --command-id ${{ steps.ssm.outputs.command_id }} \
+              --instance-id "$INSTANCE_ID" \
+              --region ${{ env.AWS_REGION }} \
+              --query '{Status:Status,Error:StandardErrorContent}' \
+              --output json)
+            STATUS=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['Status'])")
+            echo "$INSTANCE_ID: $STATUS"
+            if [ "$STATUS" != "Success" ]; then
+              echo "  ERROR: $(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['Error'])")"
+              FAILED=1
+            fi
+          done
+          [ "$FAILED" -eq 0 ] || exit 1
 
-      - name: Verify health check
+      - name: Verify health check through CloudFront
         run: |
           sleep 5
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 https://group13capstone.online/health)
